@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Task5</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/Task5.styles.css" asp-append-version="true"/>
+</head>
+<body>
+<header>
+<nav class="navbar bg-light">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Task 5</span>
+        @await RenderSectionAsync("ChangeUserButton", required: false)
+    </div>
+    
+</nav>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+@* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@* <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script> *@
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

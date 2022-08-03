@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Send a message";
+}
+
+@section ChangeUserButton{
+    <div class="navbar-nav ms-auto mb-2 mb-lg-0 d-inline">
+        <p class="d-inline me-3">@ViewBag.User.Username</p>
+        <a class="d-inline" asp-controller="Mail" asp-action="Index"><button type="button" class="btn btn-primary">Change user</button></a>
+    </div>
+}
+
+@section Scripts
+{
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script>
+    const userId = @ViewBag.User.Id
+    const sendUrl = '@Url.Action("Send", "Mail")'
+    const searchUrl = '@Url.Action("UserSearch", "Mail")'
+    const mailUrl = '@Url.Action("Mail", "Mail")'
+    </script>
+    <script src="~/js/chat.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}
+
+<div class="col-sm-10 mx-auto">
+    <form id="sendForm">
+        <h1>Send a message</h1>
+        <input type="hidden" name="From" value="@ViewBag.User.Id" />
+        <div class="mb-3 recipient">
+            <input type="text" name="To" class="form-control" id="recipient" placeholder="Recipient" maxlength="64" autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" name="Title" class="form-control" id="title" placeholder="Title" maxlength="128" autocomplete="off" required="">
+        </div>
+        <div class="mb-3">
+            <textarea class="form-control" name="Body" id="message" rows="5" placeholder="Message" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    
+    <table class="table">
+            <thead>
+            <tr>
+                        <th scope="col">From</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Date</th>
+                    </tr>
+            </thead>
+            <tbody>
+            @{
+                var mails = ViewBag.Mails;
+                foreach (var mail in mails)
+                {
+                    <tr id="@mail.Id">
+                        <td>@mail.From</td>
+                        <td class="title" id="@mail.Id">@mail.Title</td>
+                        <td>@mail.Date</td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+</div>
