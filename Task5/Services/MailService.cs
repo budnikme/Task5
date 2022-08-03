@@ -26,7 +26,7 @@ public class MailService : IMailService
         Console.WriteLine(userId);
         var mails = await (from m in _context.Mails
             where m.To == userId
-            join u in _context.Users on m.To equals u.Id
+            join u in _context.Users on m.From equals u.Id
             select new InboxDto
             {
                 Id = m.Id,
@@ -72,7 +72,7 @@ public class MailService : IMailService
     {
         return await (from m in _context.Mails
             where m.Id == mailId
-            join u in _context.Users on m.To equals u.Id
+            join u in _context.Users on m.From equals u.Id
             select new InboxDto
             {
                 Id = m.Id,
